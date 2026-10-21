@@ -1,0 +1,13 @@
+<div id="<%= dom_id(anomaly) %>" class="card" style="border-left: 5px solid #dc2626;">
+  <div class="card-head">
+    <h2 class="card-title"><%= anomaly.kind_label %></h2>
+    <span class="badge status-atsauktas"><%= l(anomaly.created_at, format: :short) %></span>
+  </div>
+  <p class="meta"><%= anomaly.message %></p>
+  <p class="meta">Užsakymas: <strong><%= anomaly.customer_order.product_name %></strong>
+    (<%= anomaly.customer_order.user.email %>)</p>
+  <div class="actions">
+    <%= button_to "Pažymėti išspręstu", admin_anomaly_path(anomaly), method: :patch,
+          class: "btn btn-small" %>
+  </div>
+</div>

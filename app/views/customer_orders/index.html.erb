@@ -1,0 +1,14 @@
+<%= turbo_stream_from current_user, "customer_orders" %>
+
+<div class="page-header">
+  <h1>Mano užsakymai</h1>
+  <%= link_to "+ Naujas užsakymas", new_customer_order_path, class: "btn" %>
+</div>
+
+<div id="customer_orders">
+  <%= render @customer_orders %>
+</div>
+
+<% if @customer_orders.empty? %>
+  <p class="empty">Užsakymų dar nėra. Sukurkite pirmąjį!</p>
+<% end %>

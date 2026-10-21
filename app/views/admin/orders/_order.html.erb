@@ -1,0 +1,22 @@
+<div id="<%= dom_id(order, :admin) %>" class="card">
+  <div class="card-head">
+    <h2 class="card-title"><%= order.product_name %></h2>
+    <span class="badge status-<%= order.status.to_s.parameterize %>"><%= order.status %></span>
+  </div>
+
+  <p class="meta">Klientas: <strong><%= order.user.email %></strong></p>
+  <p class="meta">Kiekis: <strong><%= order.quantity %></strong></p>
+  <p class="meta">Numatomas pristatymas:
+    <strong><%= l(order.expected_delivery_at, format: :short) if order.expected_delivery_at %></strong>
+  </p>
+
+  <div class="actions">
+    <% (CustomerOrder::STATUSES - [order.status]).each do |s| %>
+      <%= link_to "→ #{s}",
+            admin_order_path(order, customer_order: { status: s }),
+            class: "btn btn-secondary btn-small",
+            data: { turbo_method: :patch } %>
+    <% end %>
+    <%= link_to "Viešoji nuoroda", tracking_path(order.tracking_token), class: "btn btn-small", target: "_blank" %>
+  </div>
+</div>

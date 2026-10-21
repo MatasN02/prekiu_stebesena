@@ -1,0 +1,23 @@
+<%= turbo_stream_from "admin_orders" %>
+
+<div class="page-header">
+  <h1>Visi užsakymai</h1>
+  <%= link_to "← Mano užsakymai", customer_orders_path, class: "btn btn-secondary" %>
+</div>
+
+<div class="card">
+  <div class="actions">
+    <%= link_to "Visi (#{@counts.values.sum})", admin_orders_path, class: "btn btn-small" %>
+    <% CustomerOrder::STATUSES.each do |s| %>
+      <%= link_to "#{s} (#{@counts[s].to_i})", admin_orders_path(status: s), class: "btn btn-secondary btn-small" %>
+    <% end %>
+  </div>
+</div>
+
+<div id="admin_orders">
+  <%= render partial: "admin/orders/order", collection: @orders, as: :order %>
+</div>
+
+<% if @orders.empty? %>
+  <p class="empty">Užsakymų nėra.</p>
+<% end %>

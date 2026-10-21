@@ -1,0 +1,11 @@
+<h2>Aptiktas užsakymo nuokrypis</h2>
+<p><strong><%= @anomaly.kind_label %></strong></p>
+<p><%= @anomaly.message %></p>
+<ul>
+  <li>Produktas: <%= @order.product_name %></li>
+  <li>Kiekis: <%= @order.quantity %></li>
+  <li>Būsena: <%= @order.status %></li>
+  <li>Klientas: <%= @order.user.email %></li>
+  <li>Numatomas pristatymas: <%= l(@order.expected_delivery_at, format: :short) if @order.expected_delivery_at %></li>
+</ul>
+<p><%= link_to "Atidaryti nuokrypius", admin_anomalies_url %></p>

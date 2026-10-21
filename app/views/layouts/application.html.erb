@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Prekių stebėsena" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="data:,">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <%= link_to "📦 Prekių stebėsena", root_path, class: "brand" %>
+
+      <div class="nav-right">
+        <% if user_signed_in? %>
+          <%= link_to "Mano užsakymai", customer_orders_path %>
+          <% if current_user.admin? %>
+  <%= link_to "Visi užsakymai", admin_orders_path %> <%= link_to "Nuokrypiai (#{Anomaly.open.count})", admin_anomalies_path %>
+<% end %>
+          <%= link_to "+ Naujas užsakymas", new_customer_order_path %>
+          <span><%= current_user.email %></span>
+          <%= button_to "Atsijungti", destroy_user_session_path, method: :delete, class: "btn btn-secondary btn-small" %>
+        <% else %>
+          <%= link_to "Prisijungti", new_user_session_path %>
+          <%= link_to "Registruotis", new_user_registration_path %>
+        <% end %>
+      </div>
+    </nav>
+
+    <main class="container">
+      <% if notice.present? %><div class="flash notice"><%= notice %></div><% end %>
+      <% if alert.present? %><div class="flash alert"><%= alert %></div><% end %>
+
+      <%= yield %>
+    </main>
+  </body>
+</html>

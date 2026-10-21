@@ -1,0 +1,10 @@
+<div id="<%= dom_id(customer_order, :tracking) %>" class="card">
+  <div class="card-head">
+    <h2 class="card-title"><%= customer_order.product_name %></h2>
+    <span class="badge status-<%= customer_order.status.to_s.parameterize %>"><%= customer_order.status %></span>
+  </div>
+  <p class="meta">Kiekis: <strong><%= customer_order.quantity %></strong></p>
+  <p class="meta">Numatomas pristatymas:
+    <strong><%= l(customer_order.expected_delivery_at, format: :short) if customer_order.expected_delivery_at %></strong>
+  </p>
+</div>

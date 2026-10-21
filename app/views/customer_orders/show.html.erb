@@ -1,0 +1,34 @@
+<div class="page-header">
+  <h1><%= @customer_order.product_name %></h1>
+  <%= link_to "← Atgal į užsakymus", customer_orders_path, class: "btn btn-secondary" %>
+</div>
+
+<div class="card">
+  <p class="meta">Būsena:
+    <span class="badge status-<%= @customer_order.status.to_s.parameterize %>"><%= @customer_order.status %></span>
+  </p>
+  <p class="meta">Kiekis: <strong><%= @customer_order.quantity %></strong></p>
+  <p class="meta">Numatomas pristatymas:
+    <strong><%= l(@customer_order.expected_delivery_at, format: :short) if @customer_order.expected_delivery_at %></strong>
+  </p>
+  <p class="meta">Sukurta: <%= l(@customer_order.created_at, format: :short) %></p>
+
+  <div class="actions">
+    <%= link_to "Redaguoti", edit_customer_order_path(@customer_order), class: "btn" %>
+    <%= link_to "Viešoji sekimo nuoroda", tracking_path(@customer_order.tracking_token), class: "btn btn-secondary", target: "_blank" %>
+    <%= link_to "Ištrinti", customer_order_path(@customer_order), class: "btn btn-danger",
+          data: { turbo_method: :delete, turbo_confirm: "Ar tikrai ištrinti šį užsakymą?" } %>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Būsenų istorija</h3>
+  <ul class="timeline">
+    <% @customer_order.order_status_changes.order(:created_at).each do |change| %>
+      <li>
+        <span class="when"><%= l(change.created_at, format: :short) %></span><br>
+        <%= change.from_status || "—" %> → <strong><%= change.to_status %></strong>
+      </li>
+    <% end %>
+  </ul>
+</div>

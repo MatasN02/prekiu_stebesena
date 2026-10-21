@@ -1,0 +1,11 @@
+<%= turbo_stream_from @customer_order, "tracking" %>
+
+<h1>Užsakymo būsena</h1>
+<%= render "tracking/order", customer_order: @customer_order %>
+
+<h3>Būsenų istorija</h3>
+<ul>
+  <% @customer_order.order_status_changes.order(:created_at).each do |change| %>
+    <li><%= l(change.created_at, format: :short) %>: <%= change.from_status || "—" %> → <%= change.to_status %></li>
+  <% end %>
+</ul>

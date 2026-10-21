@@ -1,0 +1,12 @@
+<%= turbo_stream_from @customer_order, "tracking" %>
+
+<div class="page-header">
+  <h1>Užsakymo būsena</h1>
+  <% if user_signed_in? %>
+    <%= link_to "← Mano užsakymai", customer_orders_path, class: "btn btn-secondary" %>
+  <% else %>
+    <%= link_to "Prisijungti", new_user_session_path, class: "btn btn-secondary" %>
+  <% end %>
+</div>
+
+<%= render "tracking/order", customer_order: @customer_order %>
