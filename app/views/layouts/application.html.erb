@@ -18,6 +18,7 @@
       <div class="nav-right">
         <% if user_signed_in? %>
           <%= link_to "Mano užsakymai", customer_orders_path %>
+          <%= link_to "Sandėlis", warehouse_orders_path %>
           <% if current_user.admin? %>
   <%= link_to "Visi užsakymai", admin_orders_path %> <%= link_to "Nuokrypiai (#{Anomaly.open.count})", admin_anomalies_path %>
 <% end %>

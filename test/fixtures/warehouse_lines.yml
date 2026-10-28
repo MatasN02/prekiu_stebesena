@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_number: MyString
+  part_id: 1
+  part_code: MyString
+  supplier: MyString
+  quantity: 1
+  status: MyString
+  box_code: MyString
+  received_at: 2026-10-28 11:37:12
+
+two:
+  order_number: MyString
+  part_id: 1
+  part_code: MyString
+  supplier: MyString
+  quantity: 1
+  status: MyString
+  box_code: MyString
+  received_at: 2026-10-28 11:37:12

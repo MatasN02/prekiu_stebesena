@@ -15,3 +15,27 @@
 <% if @anomalies.empty? %>
   <p class="empty">Aktyvių nuokrypių nėra ✅</p>
 <% end %>
+<h2>Sandėlio nuokrypiai (<%= @warehouse_total %>)</h2>
+
+<div class="card">
+  <% @warehouse_by_kind.each do |kind, n| %>
+    <span class="badge"><%= WarehouseAnomaly::KINDS.fetch(kind, kind) %>: <%= n %></span>
+  <% end %>
+</div>
+
+<% @warehouse_anomalies.each do |a| %>
+  <div class="card" style="border-left: 5px solid #f59e0b;">
+    <div class="card-head">
+      <h2 class="card-title"><%= a.kind_label %></h2>
+      <span class="badge"><%= link_to a.order_number, warehouse_order_path(a.order_number) %></span>
+    </div>
+    <p class="meta"><%= a.message %> · Detalė: <strong><%= a.part_code %></strong></p>
+    <div class="actions">
+      <%= button_to "Pažymėti išspręstu", admin_warehouse_anomaly_path(a), method: :patch, class: "btn btn-small" %>
+    </div>
+  </div>
+<% end %>
+
+<% if @warehouse_total > 100 %>
+  <p class="meta">Rodoma 100 naujausių iš <%= @warehouse_total %>.</p>
+<% end %>

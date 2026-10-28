@@ -1,0 +1,2 @@
+class WarehouseLine < ApplicationRecord
+end

@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h1>Užsakymas <%= @number %></h1>
+  <%= link_to "← Atgal", warehouse_orders_path, class: "btn btn-secondary" %>
+</div>
+
+<% @lines.each do |l| %>
+  <div class="card">
+    <div class="card-head">
+      <h2 class="card-title"><%= l.part_code %></h2>
+      <span class="badge"><%= l.status || "—" %></span>
+    </div>
+    <p class="meta">Tiekėjas: <%= l.supplier %> · Kiekis: <strong><%= l.quantity %></strong></p>
+    <p class="meta">Dėžės kodas: <strong><%= l.box_code || "—" %></strong></p>
+  </div>
+<% end %>

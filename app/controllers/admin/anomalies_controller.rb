@@ -4,10 +4,13 @@ module Admin
 
     def index
       @anomalies = Anomaly.open.includes(customer_order: :user).order(created_at: :desc)
+      @warehouse_total = WarehouseAnomaly.unresolved.count
+      @warehouse_by_kind = WarehouseAnomaly.unresolved.group(:kind).count
+      @warehouse_anomalies = WarehouseAnomaly.unresolved.order(created_at: :desc).limit(100)
     end
 
     def scan
-      count = AnomalyDetector.run
+      count = AnomalyDetector.run + WarehouseAnomalyDetector.run
       redirect_to admin_anomalies_path, notice: "Patikra baigta. Naujų nuokrypių: #{count}."
     end
 

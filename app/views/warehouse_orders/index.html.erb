@@ -1,0 +1,27 @@
+<div class="page-header"><h1>Sandėlio užsakymai</h1></div>
+
+<div class="card">
+  <%= form_with url: warehouse_orders_path, method: :get do %>
+    <div class="form-group">
+      <%= text_field_tag :q, params[:q], placeholder: "Užsakymo nr. arba detalės kodas" %>
+    </div>
+    <div class="actions">
+      <%= submit_tag "Ieškoti" %>
+      <%= link_to "Visi", warehouse_orders_path, class: "btn btn-secondary" %>
+      <% @statuses.each do |s, c| %>
+        <%= link_to "#{s || 'be būsenos'} (#{c})", warehouse_orders_path(status: s), class: "btn btn-secondary btn-small" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<% @orders.each do |o| %>
+  <div class="card">
+    <div class="card-head">
+      <h2 class="card-title"><%= link_to o.order_number, warehouse_order_path(o.order_number) %></h2>
+      <span class="badge"><%= o.lines_count %> eil.</span>
+    </div>
+    <p class="meta">Detalių kiekis: <strong><%= o.total_qty %></strong></p>
+    <p class="meta">Dėžės kodas: <strong><%= o.box_codes.presence || "—" %></strong></p>
+  </div>
+<% end %>

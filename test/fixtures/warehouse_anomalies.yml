@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_number: MyString
+  kind: MyString
+  part_code: MyString
+  message: MyString
+  resolved_at: 2026-10-28 12:02:58
+
+two:
+  order_number: MyString
+  kind: MyString
+  part_code: MyString
+  message: MyString
+  resolved_at: 2026-10-28 12:02:58
