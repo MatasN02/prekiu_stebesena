@@ -29,3 +29,6 @@
 !/tmp/storage/.keep
 
 /public/assets
+
+# Importuojami įmonės duomenys (neįkelti į GitHub)
+/db/import/
